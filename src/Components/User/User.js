@@ -33,7 +33,7 @@ const APP_ID = '6059efeea2454da8cd5cba7c';
 
 function User(){
 
-    const [ data , setData ] = useState([]);
+    const [ users , setUsers ] = useState([]);
 
     useEffect(() => {
         axios.get(`${URL}/user`, { headers: { 'app-id': APP_ID} })
@@ -43,14 +43,16 @@ function User(){
                 const Email = res.data.data[i].email;
                 const Id = res.data.data[i].id;
                 const LastName = res.data.data[i].lastName;
-                data.push({
+                const Pic = res.data.data[i].picture;
+                users.push({
                     FirstName : FirstName,
                     Email : Email,
                     Id : Id,
-                    LastName : LastName
+                    LastName : LastName,
+                    Picture : Pic 
                 })
             }
-            console.log(data)
+            console.log(users)
         })
         .catch((err) => {
             console.log(err)
@@ -59,7 +61,16 @@ function User(){
 
     return(
         <div className="user-wrapper">
-            User
+            {users.map((user) => {
+                return(
+                    <div key={user.Id} className="user-cont">
+                        <h2>{user.FirstName}</h2>
+                        <p>{user.Id}</p>
+                        <p>{user.Email}</p>
+                        <img src={user.Picture} className="user-pic"/>
+                    </div>
+                );
+            })}
         </div>
     );
     // ReactDOM.render(<Table columns={columns} dataSource={data} />, document.getElementById('user-wrapper'));

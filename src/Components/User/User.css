@@ -1,0 +1,10 @@
+.user-cont{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+}
+
+.user-pic{
+    border-radius: 10px;
+    border: 2px solid rgb(156, 156, 156);
+}

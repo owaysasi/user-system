@@ -7,7 +7,13 @@ import { DeleteOutlined } from '@ant-design/icons';
 function Delete(){
     return(
         <div className="delete-wrapper">
-            <Button shape="round" type="danger" icon={<DeleteOutlined/>}>Delete</Button>
+            <Button 
+            shape="round" 
+            type="danger" 
+            icon={<DeleteOutlined/>}
+            onClick={() => {
+                console.log("deleted")
+            }}>Delete</Button>
         </div>
     );
 }
