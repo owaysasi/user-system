@@ -1,7 +1,9 @@
-.user-cont{
-    display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 10px;
+.user-wrapper{
+    height: 200px;
+}
+
+.add-btn-cont{
+    align-items: right;
 }
 
 .user-pic{
