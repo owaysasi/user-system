@@ -8,8 +8,9 @@ function Delete({ id }){
     return(
         <div className="delete-wrapper">
             <Button 
-            shape="round" 
-            type="danger" 
+            shape="round"
+            danger 
+            type="primary" 
             icon={<DeleteOutlined/>}
             onClick={() => {
                 console.log(`deleted ${id}`)

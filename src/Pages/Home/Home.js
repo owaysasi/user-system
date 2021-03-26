@@ -3,13 +3,14 @@ import axios from 'axios';
 import './Home.css';
 import ReactDOM from 'react-dom';
 import Delete from '../../Components/Delete/Delete';
+import Posts from '../../Components/Posts/Posts';
 import Open from '../../Components/Open/Open';
 import 'antd/dist/antd.css';
 import { Table, Space } from 'antd';
 import Add from '../../Components/Add/Add';
 
 const URL = 'https://dummyapi.io/data/api';
-const APP_ID = '605da974e6130ac5b4980760';
+const APP_ID = '605dcfd123d78a50c5067229';
 
 
 
@@ -28,7 +29,7 @@ function Home(){
         .then((res) => {
             setLoading(true);
             setState(
-                res.data.data.map(row => ({
+                res.data.data.map((row) => ({
                     firstName : row.firstName,
                     email : row.email,
                     lastName : row.lastName,
@@ -70,7 +71,8 @@ function Home(){
             key: 'x',
             render: (text,record) => (
                 <Space size="middle">
-                  <Open/>
+                  <Open id={record.key}/>
+                  <Posts id={record.key}/>
                   <Delete id={record.key}/>
                 </Space>
             )
@@ -91,7 +93,6 @@ function Home(){
                 size={'middle'}
                 />
             )}
-            
         </div>
     );
 }
