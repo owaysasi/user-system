@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
-function Delete(){
+function Delete({ id }){
     return(
         <div className="delete-wrapper">
             <Button 
@@ -12,7 +12,7 @@ function Delete(){
             type="danger" 
             icon={<DeleteOutlined/>}
             onClick={() => {
-                console.log("deleted")
+                console.log(`deleted ${id}`)
             }}>Delete</Button>
         </div>
     );

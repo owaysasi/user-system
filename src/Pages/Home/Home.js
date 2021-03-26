@@ -3,12 +3,13 @@ import axios from 'axios';
 import './Home.css';
 import ReactDOM from 'react-dom';
 import Delete from '../../Components/Delete/Delete';
+import Open from '../../Components/Open/Open';
 import 'antd/dist/antd.css';
-import { Table } from 'antd';
+import { Table, Space } from 'antd';
 import Add from '../../Components/Add/Add';
 
 const URL = 'https://dummyapi.io/data/api';
-const APP_ID = '605c5e8a99206ffc189b27d7';
+const APP_ID = '605da974e6130ac5b4980760';
 
 
 
@@ -67,7 +68,12 @@ function Home(){
             title: 'Action',
             dataIndex: 'action',
             key: 'x',
-            render: (e) => <Delete/>,
+            render: (text,record) => (
+                <Space size="middle">
+                  <Open/>
+                  <Delete id={record.key}/>
+                </Space>
+            )
         },
     ];
 

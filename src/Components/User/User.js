@@ -8,7 +8,7 @@ import { Table } from 'antd';
 import Add from '../Add/Add';
 
 const URL = 'https://dummyapi.io/data/api';
-const APP_ID = '605c5e8a99206ffc189b27d7';
+const APP_ID = '605da974e6130ac5b4980760';
 
 
 
@@ -33,7 +33,9 @@ function User(){
                 phone : res.data.phone,
                 picture : res.data.picture
             }
+            
             );
+            console.log(state)
         })
         .catch(err => console.log(err))
         .finally(() => setLoading(false));
@@ -42,10 +44,14 @@ function User(){
 
     return(
         <div className="user-wrapper">
-            <h1>{state.firstName}{state.lastName}</h1>
-            <p>{state.gender}</p>
-            <p>{state.phone}</p>
-            <img className="user-pic" src={state.picture}/>
+            {loading ? "Loading ..." : (
+                <div>
+                    <h1>{state.firstName}</h1>
+                    <p>{state.gender}</p>
+                    <p>{state.phone}</p>
+                    <img className="user-pic" src={state.picture}/>
+                </div>
+            )}
         </div>
     );
 }
