@@ -1,21 +1,25 @@
 import React from 'react';
-import './Posts.css';
+import './Postbtn.css';
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
+import { useHistory } from "react-router-dom";
 import { FileOutlined } from '@ant-design/icons';
 
-function Posts({ id }){
+function Postbtn({ id }){
+
+    const history = useHistory();
+
     return(
-        <div className="posts-wrapper">
+        <div className="postbtn-wrapper">
             <Button 
             shape="round" 
-            type="text"
+            
             icon={<FileOutlined/>}
             onClick={() => {
-                console.log(`${id}`)
+                history.push({pathname:"/posts", state : id});
             }}>Posts</Button>
         </div>
     );
 }
 
-export default Posts;
+export default Postbtn;

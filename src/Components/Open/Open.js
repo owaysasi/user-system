@@ -14,7 +14,7 @@ function Open({ id }){
         <div className="Open-wrapper">
             <Button 
             shape="round" 
-            type="alarm" 
+            type="text"
             icon={<UserOutlined/>}
             onClick={() => {
                 history.push({pathname:"/user", state : id});

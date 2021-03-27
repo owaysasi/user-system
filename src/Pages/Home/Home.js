@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Home.css';
 import ReactDOM from 'react-dom';
 import Delete from '../../Components/Delete/Delete';
-import Posts from '../../Components/Posts/Posts';
+import Postbtn from '../../Components/Postbtn/Postbtn';
 import Open from '../../Components/Open/Open';
 import 'antd/dist/antd.css';
 import { Table, Space } from 'antd';
@@ -72,7 +72,7 @@ function Home(){
             render: (text,record) => (
                 <Space size="middle">
                   <Open id={record.key}/>
-                  <Posts id={record.key}/>
+                  <Postbtn id={record.key}/>
                   <Delete id={record.key}/>
                 </Space>
             )

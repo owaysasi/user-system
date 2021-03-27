@@ -1,18 +1,37 @@
-.user-wrapper{
-    height: 657px;
+.posts-wrapper{
     display: flex;
     justify-content: center;
-    background-color: #2196F3;
     position: relative;
 }
 
-.homebtn-wrapper{
+.posts-mini-wrapper{
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.posts-owner-pic-wrapper{
+    position: absolute;
+    left: 150px;
+    top: 100px;
+}
+
+.posts-owner-pic{
+    border-radius: 50%;
+    border: 2px solid  #2196F3;
+}
+
+.posts-owner-name{
+    color: #2196F3;
+}
+
+.homebtn-posts-wrapper{
     position: absolute;
     left: 80px;
     top: 20px;
 }
 
-.user-mini-wrapper{
+.posts-mini-wrapper{
     margin-top: 100px;
     width: 800px;
     height: 400px;
@@ -22,16 +41,14 @@
     background-color: white;
 }
 
-.user-pic-wrapper{
+.posts-pic-wrapper{
     width: 200px;
     text-align: left;
 }
 
-.user-pic{
+.posts-pic{
     width: 100%;
     margin-bottom: 10px;
-    border-radius: 50%;
-    border: 2px solid #2196F3;
 }
 
 hr{
@@ -42,14 +59,14 @@ hr{
     display: flex;
 }
 
-.user-data-wrapper{
+.posts-data-wrapper{
     padding-left: 20px;
     width: 400px;
     text-align: left;
     line-height: 1.4;
 }
 
-.user-gender-wrapper{
+.posts-gender-wrapper{
     font-size: 16px;
     padding-top: 10px;
     padding-left: 10px;
