@@ -18,11 +18,13 @@ function Home(){
 
     const [ state, setState ] = useState();
     const [ loading, setLoading ] = useState(false);
+    const [ newUser, setNewUser ] = useState("");
 
 
     useEffect(() => {
         getData();
-    },[]);
+        console.log(newUser);
+    },[newUser]);
 
     const getData = async () => {
         await axios.get(`${URL}/user`, { headers: { 'app-id': APP_ID} })
@@ -49,6 +51,7 @@ function Home(){
             title: 'FirstName',
             dataIndex: 'firstName',
             key: 'firstName',
+            
         },
         {
             title: 'Email',
@@ -66,9 +69,10 @@ function Home(){
             key: 'id',
         },
         {
-            title: 'Action',
-            dataIndex: 'action',
+            title: 'Actions',
+            dataIndex: 'actions',
             key: 'x',
+            width:'150px',
             render: (text,record) => (
                 <Space size="middle">
                   <Open id={record.key}/>
@@ -76,13 +80,15 @@ function Home(){
                   <Delete id={record.key}/>
                 </Space>
             )
+            
         },
     ];
 
     return(
         <div className="home-wrapper">
             <div className="add-btn-cont">
-                <Add/>
+                <h1>User management system</h1>
+                <Add setNewUser={setNewUser}/>
             </div>
             {loading ? ("Loading ..."): (
                 <Table 
@@ -90,7 +96,7 @@ function Home(){
                 dataSource={state}
                 pagination={{ pageSize:10 }}
                 bordered={true}
-                size={'middle'}
+                size={'big'}
                 />
             )}
         </div>

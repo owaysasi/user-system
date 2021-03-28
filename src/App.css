@@ -1,5 +1,13 @@
+/* @font-face{
+  font-family: 'Carter one';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+} */
+
 .App {
   text-align: center;
+  font-family: 'Staatliches', cursive;
 }
 
 .App-logo {

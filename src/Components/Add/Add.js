@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect, forwardRef} from 'react';
 import './Add.css';
 import 'antd/dist/antd.css';
 import { Button, Modal, Input, Label } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
-function Add(){
+function Add({ setNewUser }){
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [ firstName, setFirstName ] = useState();
@@ -12,12 +12,26 @@ function Add(){
     const [ email, setEmail ] = useState();
     const [ lastName, setLastName ] = useState();
 
+    // const modalRef = useRef(null);
+
     const showModal = () => {
         setIsModalVisible(true);
     };
     
       const handleOk = () => {
-        setIsModalVisible(false);
+          if(!id){
+              console.log("Fill the id field first");
+          }
+          else{
+            console.log("done");
+            setNewUser({
+                id: id,
+                firstName: firstName,
+                lastName: lastName,
+                email: email
+            });
+            setIsModalVisible(false);
+        }
     };
     
       const handleCancel = () => {
@@ -30,7 +44,7 @@ function Add(){
             shape="round" 
             type="primary" 
             icon={<PlusOutlined />}
-            onClick={showModal}
+            onClick={() => {showModal()}}
             >Add User</Button>
             <Modal width="500px" title="Add New User" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 <div className="label-cont">

@@ -18,7 +18,7 @@ function Posts(){
     const [firstName, setFirstName ] = useState("");
     const [lastName, setLastName ] = useState("");
     const [ownerPic, setOwnerPic ] = useState();
-    const [ loading, setLoading ] = useState(false);
+    const [ loading, setLoading ] = useState(true);
 
 
     useEffect(() => {
@@ -28,7 +28,6 @@ function Posts(){
     const getData = async () => {
         await axios.get(`${URL}/${location.state}/post`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
-            setLoading(true);
             setState(
                 res.data.data.map((row) => ({
                     key : row.id,
@@ -61,7 +60,7 @@ function Posts(){
                 <h3 className="posts-owner-name">{`${firstName} ${lastName}`}</h3>
             </div>
             <div className="posts-mini-wrapper">
-                {state.map((row) => {
+                {loading ? (<div className="loading-posts">Loading...</div>):state.map((row) => {
                     return(
                         <Post 
                         key={row.key} 

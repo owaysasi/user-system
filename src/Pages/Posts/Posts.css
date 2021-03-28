@@ -16,6 +16,12 @@
     top: 100px;
 }
 
+.loading-posts{
+    color: #2196F3;
+    margin-top: 100px;
+    font-size: 40px;
+}
+
 .posts-owner-pic{
     border-radius: 50%;
     border: 2px solid  #2196F3;

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './User.css';
 import 'antd/dist/antd.css';
-import Postbtn from '../Postbtn/Postbtn';
+import Postbtn from '../../Components/Postbtn/Postbtn';
 import { useLocation } from "react-router-dom";
 import { ManOutlined, WomanOutlined } from '@ant-design/icons';
-import Homebtn from '../Homebtn/Homebtn';
+import Homebtn from '../../Components/Homebtn/Homebtn';
 const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
 
@@ -16,7 +16,7 @@ function User(){
     const location = useLocation();
 
     const [ state, setState ] = useState({});
-    const [ loading, setLoading ] = useState(false);
+    const [ loading, setLoading ] = useState(true);
 
 
     useEffect(() => {
@@ -26,7 +26,6 @@ function User(){
     const getData = async () => {
         await axios.get(`${URL}/${location.state}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
-            setLoading(true);
             setState({
                 firstName : res.data.firstName,
                 email : res.data.email,
@@ -41,7 +40,9 @@ function User(){
             console.log(res.data);
         })
         .catch(err => console.log(err))
-        .finally(() => setLoading(false));
+        .finally(() => {
+            setLoading(false);
+        })
     };
 
     return(
@@ -49,13 +50,14 @@ function User(){
             <div className="homebtn-wrapper">
                 <Homebtn/>
             </div>
-            {loading ? "Loading ..." : (
+            {loading ? (<div className="loading">Loading...</div>) :( 
+            
                 <div className="user-mini-wrapper">
                     <div className="user-pic-wrapper">
-                        <img className="user-pic" src={state.picture}/>
+                        <img className="user-pic" src={state.picture} alt="profile picture"/>
                         <hr/>
                         <label className="blue-color">Address :</label>
-                        <p><strong>{state.location.country}/{state.location.city}</strong></p>
+                        <p><strong>{`${state.location.country} / ${state.location.city}`}</strong></p>
                         <label className="blue-color">Date of birth :</label>
                         <p>{state.birthDate.substring(0,10)}</p>
                     </div>
