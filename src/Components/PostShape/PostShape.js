@@ -1,11 +1,11 @@
 import React from 'react';
-import './Post.css';
+import './PostShape.css';
 import 'antd/dist/antd.css';
 import { LikeOutlined } from '@ant-design/icons';
 
 
 
-function Post(props){
+function PostShape(props){ // Post component 
 
     const { likes, text, pic, publishDate } = props;
 
@@ -23,4 +23,4 @@ function Post(props){
     );
 }
 
-export default Post;
+export default PostShape;

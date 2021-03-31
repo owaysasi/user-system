@@ -1,12 +1,12 @@
 import React from 'react';
-import './Open.css';
+import './OpenUser.css';
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 
 
-function Open({ id }){
+function OpenUser({ id }){ // button that takes props to open a user profile
 
     const history = useHistory();
 
@@ -23,4 +23,4 @@ function Open({ id }){
     );
 }
 
-export default Open;
+export default OpenUser;

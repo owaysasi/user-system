@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Posts.css';
+import './AllPostsOfUser.css';
 import 'antd/dist/antd.css';
 import { useLocation } from "react-router-dom";
 import Homebtn from '../../Components/Homebtn/Homebtn';
 import { Row } from 'antd';
-import Post from '../../Components/Post/Post';
+import PostShape from '../../Components/PostShape/PostShape';
 const URL = `https://dummyapi.io/data/api/user`;
 const APP_ID = '605dcfd123d78a50c5067229';
 
 
-function Posts(){
+function AllPostsOfUser(){
 
     const location = useLocation();
 
@@ -62,7 +62,7 @@ function Posts(){
             <div className="posts-mini-wrapper">
                 {loading ? (<div className="loading-posts">Loading...</div>):state.map((row) => {
                     return(
-                        <Post 
+                        <PostShape 
                         key={row.key} 
                         pic={row.pic} 
                         text={row.text}
@@ -77,4 +77,4 @@ function Posts(){
 }
 
 
-export default Posts;
+export default AllPostsOfUser;

@@ -1,10 +1,10 @@
 import React from 'react';
-import './Delete.css';
+import './DeleteUser.css';
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
-function Delete({ id }){
+function DeleteUser({ id }){ // button that takes a props to delete a user
     return(
         <div className="delete-wrapper">
             <Button 
@@ -19,4 +19,4 @@ function Delete({ id }){
     );
 }
 
-export default Delete;
+export default DeleteUser;

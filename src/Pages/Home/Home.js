@@ -1,36 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Home.css';
+import store from '../../index';
 import ReactDOM from 'react-dom';
-import Delete from '../../Components/Delete/Delete';
+import DeleteUser from '../../Components/DeleteUser/DeleteUser';
 import Postbtn from '../../Components/Postbtn/Postbtn';
-import Open from '../../Components/Open/Open';
+import OpenUser from '../../Components/OpenUser/OpenUser';
 import 'antd/dist/antd.css';
 import { Table, Space } from 'antd';
-import Add from '../../Components/Add/Add';
+import AddUser from '../../Components/AddUser/AddUser';
+import { useSelector, useDispatch, connect } from 'react-redux';
+import { addUser } from '../../actions';
+import { deleteUser } from '../../actions';
+import { getUsers } from '../../actions';
 
-const URL = 'https://dummyapi.io/data/api';
+const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
 
 
 
 function Home(){
 
-    const [ state, setState ] = useState();
+    const data = useSelector(state => state.users); // GLOBALIZED STORE
+    const dispatch = useDispatch();
+    // const {
+    //     dispatch
+    // }=store
+
+    const [ users, setUsers ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ newUser, setNewUser ] = useState("");
 
+    let userTest={
+        id: 5463,
+        name: "asdasd",
+        age: 25
+    };
 
     useEffect(() => {
         getData();
+        // dispatch(getUsers(users));
         console.log(newUser);
-    },[newUser]);
+    },[]);
 
-    const getData = async () => {
-        await axios.get(`${URL}/user`, { headers: { 'app-id': APP_ID} })
+    const getData = () => {
+        setLoading(true);
+        axios.get(`${URL}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
-            setLoading(true);
-            setState(
+            setUsers(
                 res.data.data.map((row) => ({
                     firstName : row.firstName,
                     email : row.email,
@@ -75,22 +92,48 @@ function Home(){
             width:'150px',
             render: (text,record) => (
                 <Space size="middle">
-                  <Open id={record.key}/>
+                  <OpenUser id={record.key}/>
                   <Postbtn id={record.key}/>
-                  <Delete id={record.key}/>
+                  <DeleteUser id={record.key}/>
                 </Space>
             )
             
         },
     ];
 
+    function dataChecker (loading, data){
+        if(data){
+            return(
+                <Table 
+                    columns={columns} 
+                    dataSource={users}
+                    pagination={{ pageSize:10 }}
+                    bordered={true}
+                    size={'big'}
+                />
+            );
+        }
+        if(loading) return <div>Loading</div>
+
+        return null;
+    }
+
     return(
         <div className="home-wrapper">
             <div className="add-btn-cont">
                 <h1>User management system</h1>
-                <Add setNewUser={setNewUser}/>
+                <AddUser setNewUser={setNewUser}/>
+                <button onClick={() => {
+                    dispatch(addUser(userTest))
+                }}>+</button>
+                <button onClick={() => {
+                    dispatch(deleteUser("Bye"))
+                }}>-</button>
+                
             </div>
-            {loading ? ("Loading ..."): (
+            {data}
+            {dataChecker(loading,users)}
+            {/* {(loading && state) ? ("Loading ..."):
                 <Table 
                 columns={columns} 
                 dataSource={state}
@@ -98,10 +141,17 @@ function Home(){
                 bordered={true}
                 size={'big'}
                 />
-            )}
+            )} */}
         </div>
     );
 }
 
+// const mapStatetoProps = (state) => {
+//     return {state};
+// }
+
+// const mapDispatchtoProps = (dispatch) => {
+//     return {addUser};
+// }
 
 export default Home;

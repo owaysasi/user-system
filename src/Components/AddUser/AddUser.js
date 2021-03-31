@@ -1,10 +1,10 @@
-import React, {useState, useRef, useEffect, forwardRef} from 'react';
-import './Add.css';
+import React, {useState} from 'react';
+import './AddUser.css';
 import 'antd/dist/antd.css';
-import { Button, Modal, Input, Label } from 'antd';
+import { Button, Modal, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
-function Add({ setNewUser }){
+function AddUser({ setNewUser }){
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [ firstName, setFirstName ] = useState();
@@ -76,4 +76,4 @@ function Add({ setNewUser }){
     );
 }
 
-export default Add;
+export default AddUser;
