@@ -4,7 +4,7 @@ import './UserProfile.css';
 import 'antd/dist/antd.css';
 import Postbtn from '../../Components/Postbtn/Postbtn';
 import { useLocation } from "react-router-dom";
-import FetchData from '../../ApiRequests/FetchData';
+import FetchCertainData from '../../ApiRequests/FetchCertainData';
 import { ManOutlined, WomanOutlined } from '@ant-design/icons';
 import Homebtn from '../../Components/Homebtn/Homebtn';
 const URL = 'https://dummyapi.io/data/api/user';
@@ -20,9 +20,10 @@ function UserProfile(){
     const [ loading, setLoading ] = useState(true);
 
 
-    // useEffect(() => {
-    //     getData();
-    // },[]);
+    useEffect(() => {
+        FetchCertainData(location.state);
+        // getData();
+    },[]);
 
     // const getData = async () => { // to get all details about a certain user passed by "OpenUser" component
     //     await axios.get(`${URL}/${location.state}`, { headers: { 'app-id': APP_ID} })
@@ -51,7 +52,6 @@ function UserProfile(){
             <div className="homebtn-wrapper">
                 <Homebtn/>
             </div>
-            <FetchData id={location.state} setDetails={setDetails} setLoading={setLoading}/>
             {loading ? (<div className="loading">Loading...</div>) :( 
             
                 <div className="user-mini-wrapper">

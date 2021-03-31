@@ -7,61 +7,54 @@ import DeleteUser from '../../Components/DeleteUser/DeleteUser';
 import Postbtn from '../../Components/Postbtn/Postbtn';
 import OpenUser from '../../Components/OpenUser/OpenUser';
 import 'antd/dist/antd.css';
+import {FetchAllData} from '../../ApiRequests/FetchAllData';
 import { Table, Space } from 'antd';
 import AddUser from '../../Components/AddUser/AddUser';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import { addUser } from '../../actions';
 import { deleteUser } from '../../actions';
-import { getUsers } from '../../actions';
+import { setUsers } from '../../actions';
 
 const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
 
 
 
-function Home(){
+function Home(props){
 
-    const data = useSelector(state => state.users); // GLOBALIZED STORE
+    // const users = useSelector(state => state.users); // GLOBALIZED STORE
     const dispatch = useDispatch();
-    // const {
-    //     dispatch
-    // }=store
 
-    const [ users, setUsers ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ newUser, setNewUser ] = useState("");
 
-    let userTest={
-        id: 5463,
-        name: "asdasd",
-        age: 25
-    };
-
     useEffect(() => {
+        // FetchAllData("users");
         getData();
         // dispatch(getUsers(users));
-        console.log(newUser);
+        // console.log(newUser);
     },[]);
 
     const getData = () => {
         setLoading(true);
         axios.get(`${URL}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
-            setUsers(
-                res.data.data.map((row) => ({
-                    firstName : row.firstName,
-                    email : row.email,
-                    lastName : row.lastName,
-                    id : row.id,
-                    action : row.id,
-                    key: row.id
-                }))
-            );
+            res.data.data.map((row) => addUser({
+                firstName : row.firstName,
+                email : row.email,
+                lastName : row.lastName,
+                id : row.id,
+                action : row.id,
+                key: row.id
+            }))
         })
         .catch(err => console.log(err))
-        .finally(() => setLoading(false));
+        .finally(() => {
+            setLoading(false)
+        });
         
     };
+
 
     const columns = [
         {
@@ -106,7 +99,7 @@ function Home(){
             return(
                 <Table 
                     columns={columns} 
-                    dataSource={users}
+                    dataSource={props.users}
                     pagination={{ pageSize:10 }}
                     bordered={true}
                     size={'big'}
@@ -122,17 +115,15 @@ function Home(){
         <div className="home-wrapper">
             <div className="add-btn-cont">
                 <h1>User management system</h1>
-                <AddUser setNewUser={setNewUser}/>
-                <button onClick={() => {
+                {/* <button onClick={() => {
                     dispatch(addUser(userTest))
                 }}>+</button>
                 <button onClick={() => {
-                    dispatch(deleteUser("Bye"))
-                }}>-</button>
+                    dispatch(deleteUser(userTest.id))
+                }}>-</button> */}
                 
             </div>
-            {data}
-            {dataChecker(loading,users)}
+            {dataChecker(loading,props.users)}
             {/* {(loading && state) ? ("Loading ..."):
                 <Table 
                 columns={columns} 
@@ -146,12 +137,12 @@ function Home(){
     );
 }
 
-// const mapStatetoProps = (state) => {
-//     return {state};
-// }
+const mapStatetoProps = (users) => {
+    return {users};
+}
 
-// const mapDispatchtoProps = (dispatch) => {
-//     return {addUser};
-// }
+const mapDispatchtoProps = (dispatch) => {
+    return {addUser};
+}
 
-export default Home;
+export default connect(mapStatetoProps,mapDispatchtoProps)(Home);

@@ -1,19 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
 
-const URL = 'https://dummyapi.io/data/api/';
+const URL = 'https://dummyapi.io/data/api/user/';
 const APP_ID = '605dcfd123d78a50c5067229';
 
-function FetchData ({id, setLoading, setDetails}) {
+let details = [];
 
-    useEffect(() => {
-        getData();
-    },[]);
+function FetchCertainData (id) {
 
-    const getData = async () => { // to get all details about a certain user passed by "OpenUser" component
-        await axios.get(`${URL}/${id}`, { headers: { 'app-id': APP_ID} })
+     axios.get(`${URL}/${id}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
-            setDetails({
+            details.push({
                 firstName : res.data.firstName,
                 email : res.data.email,
                 gender : res.data.gender,
@@ -27,12 +24,7 @@ function FetchData ({id, setLoading, setDetails}) {
             console.log(res.data);
         })
         .catch(err => console.log(err))
-        .finally(() => {
-            setLoading(false);
-        })
-    };
-
-    return null;
+    return details;
 }
 
-export default FetchData;
+export default FetchCertainData;

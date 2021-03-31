@@ -12,9 +12,9 @@ export const deleteUser = (user) => {
     };
 };
 
-export const getUsers = (data) => {
+export const setUsers = (data) => {
     return{
-        type: 'GET',
+        type: 'SET',
         payload: data
     };
 };
