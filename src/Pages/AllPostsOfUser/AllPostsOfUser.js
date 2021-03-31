@@ -23,7 +23,8 @@ function AllPostsOfUser(){
 
 
     useEffect(() => {
-        FetchAllData("posts");
+        
+        // FetchAllData("posts");
         // getData();
     },[]);
 

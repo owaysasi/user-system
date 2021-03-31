@@ -6,7 +6,7 @@ const APP_ID = '605dcfd123d78a50c5067229';
 
 let details = [];
 
-function FetchCertainData (id) {
+function FetchCertainData (id) { // get all details about certain user by userID
 
      axios.get(`${URL}/${id}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {

@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
 import './AddUser.css';
 import 'antd/dist/antd.css';
-import { Button, Modal, Input } from 'antd';
+import { Button, Modal, Input, Empty } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { addUser, deleteUser } from '../../actions';
+import { useSelector, useDispatch, connect } from 'react-redux';
 
-function AddUser({ setNewUser }){
+function AddUser(props){
+
+    const users = useSelector(state => state.users);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [ firstName, setFirstName ] = useState();
+    const [ firstName, setFirstName ] = useState("");
     const [ id, setId ] = useState(null);
-    const [ email, setEmail ] = useState();
-    const [ lastName, setLastName ] = useState();
+    const [ email, setEmail ] = useState("");
+    const [ lastName, setLastName ] = useState("");
+    const [newUser, setNewUser] = useState({});
 
     // const modalRef = useRef(null);
 
@@ -30,11 +35,16 @@ function AddUser({ setNewUser }){
                 lastName: lastName,
                 email: email
             });
+            props.addUser(newUser);
             setIsModalVisible(false);
         }
     };
     
       const handleCancel = () => {
+        setFirstName("");
+        setLastName("");
+        setId(null);
+        setEmail("");
         setIsModalVisible(false);
     };
 
@@ -49,25 +59,25 @@ function AddUser({ setNewUser }){
             <Modal width="500px" title="Add New User" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 <div className="label-cont">
                     <label className="label">FirstName : </label>
-                    <Input placeholder={firstName} onChange={(e) => {
+                    <Input value={firstName} onChange={(e) => {
                         setFirstName(e.target.value);
                     }}/>
                 </div>
                 <div className="label-cont">
                     <label className="label">Email : </label>
-                    <Input placeholder={email} onChange={(e) => {
+                    <Input value={email} onChange={(e) => {
                         setEmail(e.target.value);
                     }}/>
                 </div>
                 <div className="label-cont">
                     <label className="label">ID : </label>
-                    <Input placeholder={id} onChange={(e) => {
+                    <Input value={id} onChange={(e) => {
                         setId(e.target.value);
                     }}/>
                 </div>
                 <div className="label-cont">
                     <label className="label">LastName : </label>
-                    <Input placeholder={lastName} onChange={(e) => {
+                    <Input value={lastName} onChange={(e) => {
                         setLastName(e.target.value);
                     }}/>
                 </div>
@@ -76,4 +86,16 @@ function AddUser({ setNewUser }){
     );
 }
 
-export default AddUser;
+
+const mapStatetoProps = (state) => {
+    return {
+        users: state.users
+    };
+}
+
+const mapDispatchtoProps = {
+    addUser,
+    deleteUser,
+}
+
+export default connect(mapStatetoProps,mapDispatchtoProps)(AddUser);
