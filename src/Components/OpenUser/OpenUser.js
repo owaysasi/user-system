@@ -17,7 +17,8 @@ function OpenUser({ id }){ // button that takes props to open a user profile
             type="text"
             icon={<UserOutlined/>}
             onClick={() => {
-                history.push({pathname:"/user", state : id});
+                // history.push({pathname:"/user", state : id});
+                console.log(id)
             }}>Profile</Button>
         </div>
     );

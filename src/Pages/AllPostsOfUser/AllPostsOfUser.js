@@ -19,11 +19,10 @@ function AllPostsOfUser(){
 
 
     useEffect(() => {
-        posts.push(FetchingCertianUserPosts())
+        // posts.push(FetchingCertianUserPosts())
         setTimeout(() => {
             setLoading(false)
-
-        },[4000])
+        },[3000])
     },[]);
 
     return(

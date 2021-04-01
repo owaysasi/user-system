@@ -30,8 +30,10 @@ function Home(){
     const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
-        // dispatch(getUsers())
-        
+        dispatch(getUsers())
+        setTimeout(() => {
+            setLoading(false)
+        },[1500])
     },[]);
 
     const columns = [  // first row of table (all columns topics)
@@ -63,9 +65,9 @@ function Home(){
             width:'150px',
             render: (record) => (
                 <Space size="middle">
-                  <OpenUser id={record.id}/>
-                  <Postbtn id={record.id}/>
-                  <DeleteUser id={record.id}/>
+                  <OpenUser key={record}/>
+                  <Postbtn key={record}/>
+                  <DeleteUser key={record}/>
                 </Space>
             )
             
@@ -73,19 +75,20 @@ function Home(){
     ];
 
     function dataChecker (loading, users){
+        if(loading) return <div className="loader"></div>
         if(users){
             return(
                 <Table 
                     columns={columns} 
                     dataSource={users}
                     pagination={{ pageSize:10 }}
+                    rowKey={record => record.id}
                     bordered={true}
                     size={'big'}
                 />
-                // <div>{users}</div>
             );
         }
-        if(loading) return <div className="loader"></div>
+        
 
         return null;
     }
@@ -94,7 +97,7 @@ function Home(){
         <div className="home-wrapper">
             <div className="add-btn-cont">
                 <h1>User management system</h1>
-                <button onClick={() => {
+                {/* <button onClick={() => {
                     console.log(FetchingCertianUserDetails())
                 }}>User Details</button>
                 <button onClick={() => {
@@ -105,42 +108,27 @@ function Home(){
                 }}>Add New User</button>
                 <button onClick={() => {
                     dispatch(deleteUser(testUser.id))
-                }}>Delete New User</button>
-                <Postbtn/>
-                <OpenUser/>
+                }}>Delete New User</button> */}
+                {/* <Postbtn/>
+                <OpenUser/> */}
                 {/* <button onClick={() => {
-                    getData()
-                }}>?</button> */}
-                <button onClick={() => {
-                    // props.setUsers(FetchingAllUsers())
                     dispatch(getUsers());
-                }}>All Users</button>
+                }}>All Users</button> */}
                 <AddUser/>
+                <Postbtn/>
             </div>
-            {/* {dataChecker(loading,users)} */}
+            {dataChecker(loading,users)}
             {/* {users} */}
             <ul>
-                <li>First Name --- Last Name --- Email</li>
-                {users.map((user) => {
+                {/* <li>First Name --- Last Name --- Email</li> */}
+                {/* {users.map((user) => {
                     return(
                     <div key={user.id}>{` ${user.firstName} `}{` ${user.lastName}`}</div>
                     );
-                })}
+                })} */}
             </ul>
         </div>
     );
 }
-
-// const mapStatetoProps = (state) => {
-//     return {
-//         users: state.users
-//     };
-// }
-
-// const mapDispatchtoProps = {
-//     addUser,
-//     deleteUser,
-//     getUsers
-// }
 
 export default Home;

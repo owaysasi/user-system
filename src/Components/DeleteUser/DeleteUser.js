@@ -3,8 +3,12 @@ import './DeleteUser.css';
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
+import {useDispatch} from 'react-redux';
 
-function DeleteUser({ id }){ // button that takes a props to delete a user
+function DeleteUser({ key }){ // button that takes a props to delete a user
+
+    const dispatch = useDispatch();
+
     return(
         <div className="delete-wrapper">
             <Button 
@@ -13,7 +17,8 @@ function DeleteUser({ id }){ // button that takes a props to delete a user
             type="primary" 
             icon={<DeleteOutlined/>}
             onClick={() => {
-                console.log(`deleted ${id}`)
+                // dispatch(DeleteUser(key));
+                console.log(key)
             }}>Delete</Button>
         </div>
     );
