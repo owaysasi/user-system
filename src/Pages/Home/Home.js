@@ -4,17 +4,17 @@ import DeleteUser from '../../Components/DeleteUser/DeleteUser';
 import Postbtn from '../../Components/Postbtn/Postbtn';
 import OpenUser from '../../Components/OpenUser/OpenUser';
 import 'antd/dist/antd.css';
-import {FetchingCertianUser} from '../../ApiRequests';
+import {FetchingCertianUserDetails, FetchingCertianUserPosts} from '../../ApiRequests';
 import { Table, Space } from 'antd';
 import AddUser from '../../Components/AddUser/AddUser';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { addUser, deleteUser, getUsers } from '../../actions';
 
 const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
 
 
-function Home(props){
+function Home(){
 
     const testUser={
         id: 5554,
@@ -25,40 +25,17 @@ function Home(props){
         key: 5554
     };
 
-    // const data = (props) => props.users; // GLOBALIZED STORE
-    // const dispatch = useDispatch();
+    const users = useSelector((state) => state.users); // GLOBAL STORE
+    const dispatch = useDispatch();
 
-    const [ loading, setLoading ] = useState(false);
-    const [ newUser, setNewUser ] = useState("");
+    const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
-        // FetchAllData("users");
-        // dispatch(getUsers(users));
-        // console.log(newUser);
+        // dispatch(getUsers())
+        setLoading(false)
     },[]);
 
-    // const getData = () => { // fetch all users data
-    //     setLoading(true);
-    //     axios.get(`${URL}`, { headers: { 'app-id': APP_ID} })
-    //     .then((res) => {
-    //         res.data.data.map((row) => props.addUser({
-    //             firstName : row.firstName,
-    //             email : row.email,
-    //             lastName : row.lastName,
-    //             id : row.id,
-    //             action : row.id,
-    //             key: row.id
-    //         }))
-    //     })
-    //     .catch(err => console.log(err))
-    //     .finally(() => {
-    //         setLoading(false)
-    //     });
-        
-    // };
-
-
-    const columns = [
+    const columns = [  // first row of table (all columns topics)
         {
             title: 'FirstName',
             dataIndex: 'firstName',
@@ -99,13 +76,14 @@ function Home(props){
     function dataChecker (loading, users){
         if(users){
             return(
-                <Table 
-                    columns={columns} 
-                    dataSource={users}
-                    pagination={{ pageSize:10 }}
-                    bordered={true}
-                    size={'big'}
-                />
+                // <Table 
+                //     columns={columns} 
+                //     dataSource={users}
+                //     pagination={{ pageSize:10 }}
+                //     bordered={true}
+                //     size={'big'}
+                // />
+                <div>{users}</div>
             );
         }
         if(loading) return <div className="loader"></div>
@@ -118,23 +96,29 @@ function Home(props){
             <div className="add-btn-cont">
                 <h1>User management system</h1>
                 <button onClick={() => {
-                    props.addUser(testUser)
-                }}>+</button>
+                    console.log(FetchingCertianUserDetails())
+                }}>User Details</button>
                 <button onClick={() => {
-                    props.deleteUser(testUser.id)
-                }}>-</button>
+                    console.log(FetchingCertianUserPosts())
+                }}>User Posts</button>
+                <button onClick={() => {
+                    dispatch(addUser(testUser))
+                }}>Add New User</button>
+                <button onClick={() => {
+                    dispatch(deleteUser(testUser.id))
+                }}>Delete New User</button>
                 {/* <button onClick={() => {
                     getData()
                 }}>?</button> */}
                 <button onClick={() => {
                     // props.setUsers(FetchingAllUsers())
-                    console.log(props.getUsers())
-                }}>All</button>
+                    dispatch(getUsers());
+                }}>All Users</button>
                 <AddUser/>
             </div>
-            {dataChecker(loading,props.users)}
-            {console.log(props.users)}
-            {/* {data.map((user) => {
+            {dataChecker(loading,users)}
+            {/* {users} */}
+            {/* {users.map((user) => {
                 return(<div key={user.id}>{user.name}</div>);
             })} */}
         </div>
@@ -147,10 +131,10 @@ function Home(props){
 //     };
 // }
 
-const mapDispatchtoProps = {
-    addUser,
-    deleteUser,
-    getUsers
-}
+// const mapDispatchtoProps = {
+//     addUser,
+//     deleteUser,
+//     getUsers
+// }
 
-export default connect(null,mapDispatchtoProps)(Home);
+export default Home;

@@ -6,7 +6,7 @@ const APP_ID = '605dcfd123d78a50c5067229';
 const USER_ID = '1Lkk06cOUCkiAsUXFLMN';
 let data = [];
 
-export const FetchingCertianUser = () => { // fetch all details about a certian user
+export const FetchingCertianUserDetails = () => { // fetch all details about a certian user
     data=[];
     axios.get(`${URL}/${USER_ID}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
@@ -43,9 +43,6 @@ export const FetchingCertianUserPosts = () => { // fetch all posts belong to cer
                     text : row.text,
                     tags : row.tags
                 })));
-            data.push(res.data.data[0].owner.firstName);
-            data.push(res.data.data[0].owner.lastName);
-            data.push(res.data.data[0].owner.picture);
             console.log(res.data.data);
         })
         .catch(err => console.log(err))

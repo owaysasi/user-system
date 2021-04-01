@@ -19,7 +19,7 @@ export const deleteUser = (user) => { // delete a specific user
 
 export const getUsers = () => {  // Fetching all data of all users
 
-    let users=[];
+    const users=[];
     axios.get(`${URL}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
             res.data.data.map((row) => users.push({
