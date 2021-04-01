@@ -4,7 +4,7 @@ import './UserProfile.css';
 import 'antd/dist/antd.css';
 import Postbtn from '../../Components/Postbtn/Postbtn';
 import { useLocation } from "react-router-dom";
-import FetchCertainData from '../../ApiRequests/FetchCertainData';
+import {FetchingCertianUserDetails} from '../../ApiRequests';
 import { ManOutlined, WomanOutlined } from '@ant-design/icons';
 import Homebtn from '../../Components/Homebtn/Homebtn';
 const URL = 'https://dummyapi.io/data/api/user';
@@ -21,31 +21,12 @@ function UserProfile(){
 
 
     useEffect(() => {
-        FetchCertainData(location.state);
-        // getData();
+        setDetails(FetchingCertianUserDetails());
+        
+        setTimeout(() => {
+            console.log(details)
+        },[2000])
     },[]);
-
-    // const getData = async () => { // to get all details about a certain user passed by "OpenUser" component
-    //     await axios.get(`${URL}/${location.state}`, { headers: { 'app-id': APP_ID} })
-    //     .then((res) => {
-    //         setDetails({
-    //             firstName : res.data.firstName,
-    //             email : res.data.email,
-    //             gender : res.data.gender,
-    //             lastName : res.data.lastName,
-    //             phone : res.data.phone,
-    //             picture : res.data.picture,
-    //             regDate : res.data.registerDate,
-    //             location : res.data.location,
-    //             birthDate : res.data.dateOfBirth
-    //         });
-    //         console.log(res.data);
-    //     })
-    //     .catch(err => console.log(err))
-    //     .finally(() => {
-    //         setLoading(false);
-    //     })
-    // };
 
     return(
         <div className="user-wrapper">

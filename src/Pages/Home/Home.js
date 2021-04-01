@@ -7,7 +7,7 @@ import 'antd/dist/antd.css';
 import {FetchingCertianUserDetails, FetchingCertianUserPosts} from '../../ApiRequests';
 import { Table, Space } from 'antd';
 import AddUser from '../../Components/AddUser/AddUser';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addUser, deleteUser, getUsers } from '../../actions';
 
 const URL = 'https://dummyapi.io/data/api/user';
@@ -27,7 +27,6 @@ function Home(){
 
     const users = useSelector((state) => state.users); // GLOBAL STORE
     const dispatch = useDispatch();
-
     const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
@@ -107,6 +106,8 @@ function Home(){
                 <button onClick={() => {
                     dispatch(deleteUser(testUser.id))
                 }}>Delete New User</button>
+                {/* <Postbtn/>
+                <OpenUser/> */}
                 {/* <button onClick={() => {
                     getData()
                 }}>?</button> */}
@@ -118,7 +119,7 @@ function Home(){
             </div>
             {dataChecker(loading,users)}
             {/* {users} */}
-            {/* {users.map((user) => {
+            {/* {users.users.map((user) => {
                 return(<div key={user.id}>{user.name}</div>);
             })} */}
         </div>

@@ -4,6 +4,7 @@ const initialState = {
 }
 
 function dataReducer (state = initialState, {type,payload}){
+    console.log(state)
     switch(type){
         case "ADD": 
             return {

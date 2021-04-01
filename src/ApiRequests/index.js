@@ -4,13 +4,13 @@ import axios from 'axios';
 const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
 const USER_ID = '1Lkk06cOUCkiAsUXFLMN';
-let data = [];
+let data = {};
 
 export const FetchingCertianUserDetails = () => { // fetch all details about a certian user
-    data=[];
+    data={};
     axios.get(`${URL}/${USER_ID}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
-            data.push({
+            data={
                 firstName : res.data.firstName,
                 email : res.data.email,
                 gender : res.data.gender,
@@ -20,7 +20,7 @@ export const FetchingCertianUserDetails = () => { // fetch all details about a c
                 regDate : res.data.registerDate,
                 location : res.data.location,
                 birthDate : res.data.dateOfBirth
-            });
+            };
             console.log(res.data);
         })
         .catch(err => console.log(err))
