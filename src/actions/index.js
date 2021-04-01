@@ -20,7 +20,7 @@ export const deleteUser = (user) => { // delete a specific user
 export const getUsers = () => {  // Fetching all data of all users
 
     const users=[];
-    axios.get(`${URL}`, { headers: { 'app-id': APP_ID} })
+    return axios.get(`${URL}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
             res.data.data.map((row) => users.push({
                 firstName : row.firstName,
@@ -30,12 +30,12 @@ export const getUsers = () => {  // Fetching all data of all users
                 action : row.id,
                 key: row.id
             }))
+            return{
+                type: 'GET',
+                payload: users
+            };
         })
         .catch(err => console.log(err))
         .finally(() => console.log(users))
 
-    return{
-        type: 'GET',
-        payload: users
-    };
 };

@@ -8,6 +8,7 @@ import rootReducer from "./reducers";
 import { createStore, applyMiddleware, compose } from "redux";
 import ReduxThunk from "redux-thunk";
 import promiseMiddleware from "redux-promise";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 let store ; // GLOBALIZED STATE
 
@@ -18,7 +19,7 @@ const createStoreWithMiddleware = applyMiddleware(
 
 store = createStoreWithMiddleware(
   rootReducer,
-  window.REDUX_DEVTOOLS_EXTENSION && window.REDUX_DEVTOOLS_EXTENSION()
+  composeWithDevTools()
 );
 
 ReactDOM.render(

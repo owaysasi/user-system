@@ -4,11 +4,11 @@ import axios from 'axios';
 const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
 const USER_ID = '1Lkk06cOUCkiAsUXFLMN';
-let data = {};
+let data = [];
 
 export const FetchingCertianUserDetails = () => { // fetch all details about a certian user
     data={};
-    axios.get(`${URL}/${USER_ID}`, { headers: { 'app-id': APP_ID} })
+    return axios.get(`${URL}/${USER_ID}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
             data={
                 firstName : res.data.firstName,
@@ -22,14 +22,14 @@ export const FetchingCertianUserDetails = () => { // fetch all details about a c
                 birthDate : res.data.dateOfBirth
             };
             console.log(res.data);
+            return data;
         })
         .catch(err => console.log(err))
-    return data;
 };
 
 export const FetchingCertianUserPosts = () => { // fetch all posts belong to certain user
     data=[];
-    axios.get(`${URL}/${USER_ID}/post`, { headers: { 'app-id': APP_ID} })
+    return axios.get(`${URL}/${USER_ID}/post`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
             data.push(
                 res.data.data.map((row) => ({
@@ -44,9 +44,9 @@ export const FetchingCertianUserPosts = () => { // fetch all posts belong to cer
                     tags : row.tags
                 })));
             console.log(res.data.data);
+            return data;
         })
         .catch(err => console.log(err))
-    return data;
 };
 
 // export const FetchingAllUsers = () => { // Fetching all data of all users

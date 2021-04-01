@@ -16,11 +16,12 @@ function dataReducer (state = initialState, {type,payload}){
 
         case "DELETE":
             return {
-                // users:[
-                //     ...state.users.filter(user => user.id !== payload)
-                // ]
                 ...state,
-                users: state.users.splice(payload)
+                users:[
+                    ...state.users.filter(user => user.id !== payload)
+                ]
+                // ...state,
+                // users: state.users.splice(payload)
                 
             };
 

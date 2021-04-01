@@ -11,7 +11,7 @@ function AllPostsOfUser(){
 
     const location = useLocation();
 
-    const [ posts, setPosts ] = useState([]);
+    let posts = [];
     const [firstName, setFirstName ] = useState("");
     const [lastName, setLastName ] = useState("");
     const [ownerPic, setOwnerPic ] = useState();
@@ -19,7 +19,11 @@ function AllPostsOfUser(){
 
 
     useEffect(() => {
-        posts.concat(FetchingCertianUserPosts(location.state))
+        posts.push(FetchingCertianUserPosts())
+        setTimeout(() => {
+            setLoading(false)
+
+        },[4000])
     },[]);
 
     return(
@@ -35,14 +39,15 @@ function AllPostsOfUser(){
                 {loading ? (<div className="loader"></div>):posts.map((row) => {
                     return(
                         <PostShape 
-                        key={row.key} 
-                        pic={row.pic} 
-                        text={row.text}
-                        publishDate={row.publishDate}
-                        likes={row.likes}
+                        key={row.data.key} 
+                        pic={row.data.pic} 
+                        text={row.data.text}
+                        publishDate={row.data.publishDate}
+                        likes={row.data.likes}
                          />
                     );
                 })}
+                {console.log(posts)}
             </div>
         </div>
     );

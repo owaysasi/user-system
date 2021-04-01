@@ -8,7 +8,8 @@ import { useSelector, useDispatch, connect } from 'react-redux';
 
 function AddUser(props){
 
-    const users = useSelector(state => state.users);
+
+    const dispatch = useDispatch();
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [ firstName, setFirstName ] = useState("");
@@ -29,13 +30,12 @@ function AddUser(props){
           }
           else{
             console.log("done");
-            setNewUser({
+            dispatch(addUser({
                 id: id,
                 firstName: firstName,
                 lastName: lastName,
                 email: email
-            });
-            props.addUser(newUser);
+            }));
             setIsModalVisible(false);
         }
     };
@@ -86,16 +86,4 @@ function AddUser(props){
     );
 }
 
-
-const mapStatetoProps = (state) => {
-    return {
-        users: state.users
-    };
-}
-
-const mapDispatchtoProps = {
-    addUser,
-    deleteUser,
-}
-
-export default connect(mapStatetoProps,mapDispatchtoProps)(AddUser);
+export default AddUser;

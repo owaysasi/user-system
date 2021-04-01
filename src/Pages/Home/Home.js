@@ -18,20 +18,20 @@ function Home(){
 
     const testUser={
         id: 5554,
-        firstname: "Oways",
-        lastname:"Asi",
+        firstName: "Oways",
+        lastName:"Asi",
         email:"ASDASD@asd.com",
         action: 5554,
         key: 5554
     };
 
-    const users = useSelector((state) => state.users); // GLOBAL STORE
+    const users = useSelector((state) => state.dataReducer.users); // GLOBAL STORE
     const dispatch = useDispatch();
     const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
         // dispatch(getUsers())
-        setLoading(false)
+        
     },[]);
 
     const columns = [  // first row of table (all columns topics)
@@ -63,9 +63,9 @@ function Home(){
             width:'150px',
             render: (record) => (
                 <Space size="middle">
-                  <OpenUser id={record.key}/>
-                  <Postbtn id={record.key}/>
-                  <DeleteUser id={record.key}/>
+                  <OpenUser id={record.id}/>
+                  <Postbtn id={record.id}/>
+                  <DeleteUser id={record.id}/>
                 </Space>
             )
             
@@ -75,14 +75,14 @@ function Home(){
     function dataChecker (loading, users){
         if(users){
             return(
-                // <Table 
-                //     columns={columns} 
-                //     dataSource={users}
-                //     pagination={{ pageSize:10 }}
-                //     bordered={true}
-                //     size={'big'}
-                // />
-                <div>{users}</div>
+                <Table 
+                    columns={columns} 
+                    dataSource={users}
+                    pagination={{ pageSize:10 }}
+                    bordered={true}
+                    size={'big'}
+                />
+                // <div>{users}</div>
             );
         }
         if(loading) return <div className="loader"></div>
@@ -106,8 +106,8 @@ function Home(){
                 <button onClick={() => {
                     dispatch(deleteUser(testUser.id))
                 }}>Delete New User</button>
-                {/* <Postbtn/>
-                <OpenUser/> */}
+                <Postbtn/>
+                <OpenUser/>
                 {/* <button onClick={() => {
                     getData()
                 }}>?</button> */}
@@ -117,11 +117,16 @@ function Home(){
                 }}>All Users</button>
                 <AddUser/>
             </div>
-            {dataChecker(loading,users)}
+            {/* {dataChecker(loading,users)} */}
             {/* {users} */}
-            {/* {users.users.map((user) => {
-                return(<div key={user.id}>{user.name}</div>);
-            })} */}
+            <ul>
+                <li>First Name --- Last Name --- Email</li>
+                {users.map((user) => {
+                    return(
+                    <div key={user.id}>{` ${user.firstName} `}{` ${user.lastName}`}</div>
+                    );
+                })}
+            </ul>
         </div>
     );
 }
