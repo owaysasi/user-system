@@ -4,13 +4,13 @@ import axios from 'axios';
 const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
 const USER_ID = '1Lkk06cOUCkiAsUXFLMN';
-let data = [];
+let details = [];
 
 export const FetchingCertianUserDetails = () => { // fetch all details about a certian user
-    data={};
-    return axios.get(`${URL}/${USER_ID}`, { headers: { 'app-id': APP_ID} })
+    details={};
+     axios.get(`${URL}/${USER_ID}`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
-            data={
+            details=Object.assign({},{
                 firstName : res.data.firstName,
                 email : res.data.email,
                 gender : res.data.gender,
@@ -20,33 +20,32 @@ export const FetchingCertianUserDetails = () => { // fetch all details about a c
                 regDate : res.data.registerDate,
                 location : res.data.location,
                 birthDate : res.data.dateOfBirth
-            };
-            console.log(res.data);
-            return data;
+            });
+            console.log(details);
+            return details;
         })
         .catch(err => console.log(err))
 };
 
 export const FetchingCertianUserPosts = () => { // fetch all posts belong to certain user
-    data=[];
-    return axios.get(`${URL}/${USER_ID}/post`, { headers: { 'app-id': APP_ID} })
+    details=[];
+     axios.get(`${URL}/${USER_ID}/post`, { headers: { 'app-id': APP_ID} })
         .then((res) => {
-            data.push(
-                res.data.data.map((row) => ({
-                    key : row.id,
-                    pic : row.image,
-                    likes : row.likes,
-                    publishDate : row.publishDate,
-                    ownerPic: row.owner.picture,
-                    ownerFirstName: row.owner.firstName,
-                    ownerLastName: row.owner.lastName,
-                    text : row.text,
-                    tags : row.tags
-                })));
+            res.data.data.map((row) => details.push({
+                key : row.id,
+                pic : row.image,
+                likes : row.likes,
+                publishDate : row.publishDate,
+                ownerPic: row.owner.picture,
+                ownerFirstName: row.owner.firstName,
+                ownerLastName: row.owner.lastName,
+                text : row.text,
+                tags : row.tags
+            }));
             console.log(res.data.data);
-            return data;
         })
         .catch(err => console.log(err))
+        return details;
 };
 
 // export const FetchingAllUsers = () => { // Fetching all data of all users

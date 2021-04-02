@@ -24,7 +24,8 @@ function UserProfile(){
         setDetails(FetchingCertianUserDetails());
         
         setTimeout(() => {
-            console.log(details)
+            // setLoading(false)
+            console.log(FetchingCertianUserDetails)
         },[2000])
     },[]);
 

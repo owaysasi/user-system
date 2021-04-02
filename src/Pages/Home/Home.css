@@ -17,6 +17,14 @@
   width: 200px;
 }
 
+.profile-action{
+  color: purple;
+}
+
+.delete-action{
+  color: red;
+}
+
 .loader {
     margin: 20px auto;
     border: 16px solid #f3f3f3;
