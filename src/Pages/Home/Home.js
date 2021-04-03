@@ -88,7 +88,7 @@ function Home(){
                     pagination={{ pageSize:10 }}
                     rowKey={record => record.id}
                     bordered={true}
-                    size={'big'}
+                    size={'middle'}
                 >
                     <Column title="FirstName" dataIndex="firstName" key="firstName" />
                     <Column title="Id" dataIndex="id" key="id" />
@@ -97,12 +97,13 @@ function Home(){
                     <Column
                     title="Action"
                     key="action"
+                    width="250px"
                     render={(text, record) => (
                         <Space size="middle">
                             <a>Posts</a>
                             <a className="profile-action" onClick={() => {
                                 history.push({pathname:"/user", state : record.id});
-                            }}>Profile</a>
+                            }}>Open Profile</a>
                             <a className="delete-action" onClick={() => {
                                 dispatch(deleteUser(record.id))
                             }}>Delete User</a>
@@ -112,45 +113,16 @@ function Home(){
                 </Table>
             );
         }
-        
 
-        return null;
     }
 
     return(
         <div className="home-wrapper">
             <div className="add-btn-cont">
                 <h1>User management system</h1>
-                {/* <button onClick={() => {
-                    console.log(FetchingCertianUserDetails())
-                }}>User Details</button>
-                <button onClick={() => {
-                    console.log(FetchingCertianUserPosts())
-                }}>User Posts</button>
-                <button onClick={() => {
-                    dispatch(addUser(testUser))
-                }}>Add New User</button>
-                <button onClick={() => {
-                    dispatch(deleteUser(testUser.id))
-                }}>Delete New User</button> */}
-                {/* <Postbtn/>
-                <OpenUser/> */}
-                {/* <button onClick={() => {
-                    dispatch(getUsers());
-                }}>All Users</button> */}
                 <AddUser/>
-                <Postbtn/>
             </div>
             {dataChecker(loading,users)}
-            {/* {users} */}
-            <ul>
-                {/* <li>First Name --- Last Name --- Email</li> */}
-                {/* {users.map((user) => {
-                    return(
-                    <div key={user.id}>{` ${user.firstName} `}{` ${user.lastName}`}</div>
-                    );
-                })} */}
-            </ul>
         </div>
     );
 }

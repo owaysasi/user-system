@@ -4,27 +4,27 @@ import axios from 'axios';
 const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
 const USER_ID = '1Lkk06cOUCkiAsUXFLMN';
-let details = [];
+let details = {};
 
-export const FetchingCertianUserDetails = () => { // fetch all details about a certian user
-    details={};
-     axios.get(`${URL}/${USER_ID}`, { headers: { 'app-id': APP_ID} })
-        .then((res) => {
-            details=Object.assign({},{
-                firstName : res.data.firstName,
-                email : res.data.email,
-                gender : res.data.gender,
-                lastName : res.data.lastName,
-                phone : res.data.phone,
-                picture : res.data.picture,
-                regDate : res.data.registerDate,
-                location : res.data.location,
-                birthDate : res.data.dateOfBirth
-            });
-            console.log(details);
-            return details;
-        })
-        .catch(err => console.log(err))
+export const FetchingCertianUserDetails = async () => { // fetch all details about a certian user
+    // details={};
+    const x = await axios.get(`${URL}/${USER_ID}`, { headers: { 'app-id': APP_ID} })
+        const detail = {
+            firstName : x.data.firstName,
+            email : x.data.email,
+            gender : x.data.gender,
+            lastName : x.data.lastName,
+            phone : x.data.phone,
+            picture : x.data.picture,
+            regDate : x.data.registerDate,
+            location : x.data.location,
+            birthDate : x.data.dateOfBirth
+           
+        };
+        console.log(detail)
+        return detail ;
+        // .catch(err => console.log(err))
+
 };
 
 export const FetchingCertianUserPosts = () => { // fetch all posts belong to certain user

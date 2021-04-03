@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import {FetchingCertianUserDetails} from '../../ApiRequests';
 import { ManOutlined, WomanOutlined } from '@ant-design/icons';
 import Homebtn from '../../Components/Homebtn/Homebtn';
+import { Alert } from 'antd';
 const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
 
@@ -19,14 +20,18 @@ function UserProfile(){
     const [ details, setDetails ] = useState({});
     const [ loading, setLoading ] = useState(true);
 
-
+    const a = async () => {
+        const result = await  FetchingCertianUserDetails()
+        setDetails(result)
+    }
     useEffect(() => {
-        setDetails(FetchingCertianUserDetails());
+    
+        a()
         
         setTimeout(() => {
-            // setLoading(false)
-            console.log(FetchingCertianUserDetails)
-        },[2000])
+            setLoading(false)
+            console.log(details)
+        },[3000])
     },[]);
 
     return(
@@ -34,11 +39,11 @@ function UserProfile(){
             <div className="homebtn-wrapper">
                 <Homebtn/>
             </div>
-            {loading ? (<div className="loading">Loading...</div>) :( 
+            {loading ? (<div className="loader-user-profile"></div>) :( 
             
                 <div className="user-mini-wrapper">
                     <div className="user-pic-wrapper">
-                        <img className="user-pic" src={details.picture} alt="profile picture"/>
+                        <img className="user-pic" src={details?.picture} alt="profile picture"/>
                         <hr/>
                         <label className="blue-color">Address :</label>
                         <p><strong>{`${details.location.country} / ${details.location.city}`}</strong></p>
