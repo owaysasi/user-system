@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import DeleteUser from '../../Components/DeleteUser/DeleteUser';
-import Postbtn from '../../Components/Postbtn/Postbtn';
-import OpenUser from '../../Components/OpenUser/OpenUser';
 import 'antd/dist/antd.css';
-import {FetchingCertianUserDetails, FetchingCertianUserPosts} from '../../ApiRequests';
 import { Table, Space } from 'antd';
 import AddUser from '../../Components/AddUser/AddUser';
 import { useSelector, useDispatch } from 'react-redux';
-import { addUser, deleteUser, getUsers } from '../../actions';
+import { deleteUser, getUsers } from '../../actions';
 import {useHistory} from 'react-router-dom';
 
 const URL = 'https://dummyapi.io/data/api/user';
@@ -19,16 +15,6 @@ const {Column} = Table;
 function Home(){
 
     const history = useHistory();
-
-    const testUser={
-        id: 5554,
-        firstName: "Oways",
-        lastName:"Asi",
-        email:"ASDASD@asd.com",
-        action: 5554,
-        key: 5554
-    };
-
     const users = useSelector((state) => state.dataReducer.users); // GLOBAL STORE
     const dispatch = useDispatch();
     const [ loading, setLoading ] = useState(true);
@@ -40,50 +26,11 @@ function Home(){
         },[1500])
     },[]);
 
-    // const columns = [  // first row of table (all columns topics)
-    //     {
-    //         title: 'FirstName',
-    //         dataIndex: 'firstName',
-    //         key: 'firstName',
-            
-    //     },
-    //     {
-    //         title: 'Email',
-    //         dataIndex: 'email',
-    //         key: 'email',
-    //     },
-    //     {
-    //         title: 'LastName',
-    //         dataIndex: 'lastName',
-    //         key: 'lastName',
-    //     },
-    //     {
-    //         title: 'ID',
-    //         dataIndex: 'id',
-    //         key: 'id',
-    //     },
-    //     {
-    //         title: 'Actions',
-    //         dataIndex: 'actions',
-    //         key: 'x',
-    //         width:'150px',
-    //         render: (record) => (
-    //             <Space size="middle">
-    //               <OpenUser key={record}/>
-    //               <Postbtn key={record}/>
-    //               <DeleteUser key={record}/>
-    //             </Space>
-    //         )
-            
-    //     },
-    // ];
-
     function dataChecker (loading, users){
         if(loading) return <div className="loader"></div>
         if(users){
             return(
                 <Table 
-                    // columns={columns} 
                     dataSource={users}
                     pagination={{ pageSize:10 }}
                     rowKey={record => record.id}
@@ -100,7 +47,9 @@ function Home(){
                     width="250px"
                     render={(text, record) => (
                         <Space size="middle">
-                            <a>Posts</a>
+                            <a onClick={() => {
+                                history.push({pathname:"/posts", state : record.id});
+                            }}>Posts</a>
                             <a className="profile-action" onClick={() => {
                                 history.push({pathname:"/user", state : record.id});
                             }}>Open Profile</a>

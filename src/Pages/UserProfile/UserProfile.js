@@ -20,18 +20,17 @@ function UserProfile(){
     const [ details, setDetails ] = useState({});
     const [ loading, setLoading ] = useState(true);
 
-    const a = async () => {
-        const result = await  FetchingCertianUserDetails()
+    const getDatatoState = async () => {
+        const result = await  FetchingCertianUserDetails(location.state)
         setDetails(result)
     }
     useEffect(() => {
     
-        a()
+        getDatatoState()
         
         setTimeout(() => {
             setLoading(false)
-            console.log(details)
-        },[3000])
+        },[2000])
     },[]);
 
     return(

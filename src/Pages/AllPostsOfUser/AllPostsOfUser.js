@@ -11,42 +11,48 @@ function AllPostsOfUser(){
 
     const location = useLocation();
 
-    let posts = [];
+    const [posts, setPosts] = useState([]);
     const [firstName, setFirstName ] = useState("");
     const [lastName, setLastName ] = useState("");
     const [ownerPic, setOwnerPic ] = useState();
     const [ loading, setLoading ] = useState(true);
 
+    const getDatatoState = async () => {
+        const results = await  FetchingCertianUserPosts(location.state)
+        setPosts(results)
+    }
 
     useEffect(() => {
-        console.log("state is "+FetchingCertianUserPosts(location.state))
+        getDatatoState()
         setTimeout(() => {
             setLoading(false)
-        },[2000])
-    },[]);
+        },[3000])
+    },[]);  
 
     return(
         <div className="posts-wrapper">
             <div className="homebtn-posts-wrapper">
                 <Homebtn/>
             </div>
-            {/* <div className="posts-owner-pic-wrapper">
-                <img className="posts-owner-pic" src={ownerPic}/>
-                <h3 className="posts-owner-name">{`${firstName} ${lastName}`}</h3>
-            </div> */}
+            {!loading && 
+            
+            <div className="posts-owner-pic-wrapper">
+                <img className="posts-owner-pic" src={posts[0].ownerPic}/>
+                <h3 className="posts-owner-name">{`${posts[0].ownerFirstName} ${posts[0].ownerLastName}`}</h3>
+            </div>
+            }
             <div className="posts-mini-wrapper">
                 {loading ? (<div className="loader"></div>):posts.map((row) => {
                     return(
                         <PostShape 
-                        key={row.data.key} 
-                        pic={row.data.pic} 
-                        text={row.data.text}
-                        publishDate={row.data.publishDate}
-                        likes={row.data.likes}
+                        key={row.key} 
+                        pic={row.pic} 
+                        text={row.text}
+                        publishDate={row.publishDate}
+                        likes={row.likes}
                          />
                     );
                 })}
-                {console.log(posts)}
             </div>
         </div>
     );
