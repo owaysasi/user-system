@@ -4,26 +4,23 @@ import 'antd/dist/antd.css';
 import { Table, Space } from 'antd';
 import AddUser from '../../Components/AddUser/AddUser';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteUser, getUsers } from '../../actions';
+import { fetchUsers, deleteUser } from '../../Features/usersSlice/usersSlice';
 import {useHistory} from 'react-router-dom';
 
 const URL = 'https://dummyapi.io/data/api/user';
 const APP_ID = '605dcfd123d78a50c5067229';
-
 const {Column} = Table;
 
 function Home(){
 
     const history = useHistory();
-    const users = useSelector((state) => state.dataReducer.users); // GLOBAL STORE
+    const users = useSelector((state) => state.usersReducer); // GLOBAL STORE
     const dispatch = useDispatch();
-    const [ loading, setLoading ] = useState(true);
+    const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
-        dispatch(getUsers())
-        setTimeout(() => {
-            setLoading(false)
-        },[1500])
+        setLoading(true)
+        dispatch(fetchUsers(() => setLoading()))
     },[]);
 
     function dataChecker (loading, users){

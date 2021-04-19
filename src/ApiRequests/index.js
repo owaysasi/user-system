@@ -21,6 +21,7 @@ export const FetchingCertianUserDetails = async (id) => { // fetch all details a
            
         };
         console.log(details)
+        // setLoading(false)
         return details ;
         // .catch(err => console.log(err))
 

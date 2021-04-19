@@ -3,7 +3,7 @@ import './AddUser.css';
 import 'antd/dist/antd.css';
 import { Button, Modal, Input, Empty } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { addUser, deleteUser } from '../../actions';
+import { addUser } from '../../Features/usersSlice/usersSlice';
 import { useSelector, useDispatch, connect } from 'react-redux';
 
 function AddUser(props){
@@ -24,6 +24,14 @@ function AddUser(props){
         setIsModalVisible(true);
     };
     
+    const emptyFields = () => {
+        setFirstName("");
+        setLastName("");
+        setId(null);
+        setEmail("");
+        setIsModalVisible(false);   
+    }
+
       const handleOk = () => {
           if(!id){
               console.log("Fill the id field first");
@@ -36,16 +44,13 @@ function AddUser(props){
                 lastName: lastName,
                 email: email
             }));
+            emptyFields();
             setIsModalVisible(false);
         }
     };
     
       const handleCancel = () => {
-        setFirstName("");
-        setLastName("");
-        setId(null);
-        setEmail("");
-        setIsModalVisible(false);
+        emptyFields();
     };
 
     return(

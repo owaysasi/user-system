@@ -4,23 +4,26 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import rootReducer from "./reducers";
+import { combineReducers } from 'redux';
+import store from './Store';
+// import rootReducer from "./reducers";
 import { createStore, applyMiddleware, compose } from "redux";
+import { configureStore } from '@reduxjs/toolkit';
 import ReduxThunk from "redux-thunk";
 import promiseMiddleware from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-let store ; // GLOBALIZED STATE
+// let store ; // GLOBALIZED STATE
 
-const createStoreWithMiddleware = applyMiddleware(
-  promiseMiddleware,
-  ReduxThunk
-)(createStore);
+// const createStoreWithMiddleware = applyMiddleware(
+//   promiseMiddleware,
+//   ReduxThunk
+// )(createStore);
 
-store = createStoreWithMiddleware(
-  rootReducer,
-  composeWithDevTools()
-);
+// store = createStoreWithMiddleware(
+//   rootReducer,
+//   composeWithDevTools()
+// );
 
 ReactDOM.render(
   <React.StrictMode>
