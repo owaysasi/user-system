@@ -4,14 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { combineReducers } from 'redux';
+// import reducer from '../Features/usersSlice/usersSlice';
+// import { combineReducers } from 'redux';
 import store from './Store';
 // import rootReducer from "./reducers";
-import { createStore, applyMiddleware, compose } from "redux";
-import { configureStore } from '@reduxjs/toolkit';
-import ReduxThunk from "redux-thunk";
-import promiseMiddleware from "redux-promise";
-import { composeWithDevTools } from "redux-devtools-extension";
+// import { createStore, applyMiddleware, compose } from "redux";
+// import { configureStore } from '@reduxjs/toolkit';
+// import thunk from "redux-thunk";
+// import promiseMiddleware from "redux-promise";
+// import { composeWithDevTools } from "redux-devtools-extension";
 
 // let store ; // GLOBALIZED STATE
 

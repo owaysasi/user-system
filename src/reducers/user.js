@@ -1,10 +1,11 @@
 // import reducer from ''
-import {createReducer } from '@reduxjs/toolkit';
+// import {createReducer } from '@reduxjs/toolkit';
 
-const initialState = {
-    users:[
-    ]
-}
+// const initialState = {
+//     users:[
+//     ],
+//     posts:["hello","darling"]
+// }
 
 // function dataReducer (state = initialState, {type,payload}){
 //     switch(type){

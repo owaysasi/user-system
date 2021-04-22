@@ -3,8 +3,15 @@ import './Home.css';
 import 'antd/dist/antd.css';
 import { Table, Space } from 'antd';
 import AddUser from '../../Components/AddUser/AddUser';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchUsers, deleteUser } from '../../Features/usersSlice/usersSlice';
+//import { connect } from "react-redux";
+import {getUsersSelector,getTopThreeUsers, getPostsSelector} from '../../Selector/Selector';
+ import { useSelector, useDispatch } from 'react-redux';
+import { 
+    fetchDataThunk, 
+    getUsers, 
+    deleteUser, 
+    addUser, 
+    getMemoMath } from '../../Features/usersSlice/usersSlice';
 import {useHistory} from 'react-router-dom';
 
 const URL = 'https://dummyapi.io/data/api/user';
@@ -14,16 +21,22 @@ const {Column} = Table;
 function Home(){
 
     const history = useHistory();
-    const users = useSelector((state) => state.usersReducer); // GLOBAL STORE
+    // const users = useSelector((state) => state.userReducer); // GLOBAL STORE
+    const users = useSelector(getUsersSelector);
+    const posts = useSelector(getPostsSelector); 
     const dispatch = useDispatch();
     const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
         setLoading(true)
-        dispatch(fetchUsers(() => setLoading()))
+        const callbackFunc = () => setLoading(false);
+        dispatch(fetchDataThunk(callbackFunc))
+        // getUsers(callbackFunc, dispatch);
+        // getMemoMath(callbackFunc,dispatch)
+        // getMemoMath(callbackFunc,dispatch)
     },[]);
 
-    function dataChecker (loading, users){
+    function dataChecker (users){
         if(loading) return <div className="loader"></div>
         if(users){
             return(
@@ -51,7 +64,7 @@ function Home(){
                                 history.push({pathname:"/user", state : record.id});
                             }}>Open Profile</a>
                             <a className="delete-action" onClick={() => {
-                                dispatch(deleteUser(record.id))
+                                // dispatch(fetchDataConsole())
                             }}>Delete User</a>
                         </Space>
                     )}
@@ -68,7 +81,8 @@ function Home(){
                 <h1>User management system</h1>
                 <AddUser/>
             </div>
-            {dataChecker(loading,users)}
+            {dataChecker(users)}
+            {posts}
         </div>
     );
 }
