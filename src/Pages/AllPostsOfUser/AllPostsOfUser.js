@@ -12,9 +12,6 @@ function AllPostsOfUser(){
     const location = useLocation();
 
     const [posts, setPosts] = useState([]);
-    const [firstName, setFirstName ] = useState("");
-    const [lastName, setLastName ] = useState("");
-    const [ownerPic, setOwnerPic ] = useState();
     const [ loading, setLoading ] = useState(true);
 
     const getDatatoState = async () => {

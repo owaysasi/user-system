@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 // import reducer from '../Features/usersSlice/usersSlice';
 // import { combineReducers } from 'redux';
-import store from './Store';
+import store from './Store/store';
 // import rootReducer from "./reducers";
 // import { createStore, applyMiddleware, compose } from "redux";
 // import { configureStore } from '@reduxjs/toolkit';

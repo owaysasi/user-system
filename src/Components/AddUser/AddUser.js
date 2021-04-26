@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './AddUser.css';
 import 'antd/dist/antd.css';
-import { Button, Modal, Input, Empty } from 'antd';
+import { Button, Modal, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { addUser } from '../../Features/usersSlice/usersSlice';
-import { useSelector, useDispatch, connect } from 'react-redux';
+import { addUser } from '../../Features/Slice/UsersSlice/usersSlice';
+import { useDispatch } from 'react-redux';
 
-function AddUser(props){
+function AddUser(){
 
 
     const dispatch = useDispatch();
@@ -16,7 +16,6 @@ function AddUser(props){
     const [ id, setId ] = useState(null);
     const [ email, setEmail ] = useState("");
     const [ lastName, setLastName ] = useState("");
-    const [newUser, setNewUser] = useState({});
 
     // const modalRef = useRef(null);
 

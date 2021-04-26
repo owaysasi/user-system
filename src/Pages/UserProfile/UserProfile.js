@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import './UserProfile.css';
 import 'antd/dist/antd.css';
 import Postbtn from '../../Components/Postbtn/Postbtn';
@@ -7,11 +6,6 @@ import { useLocation } from "react-router-dom";
 import {FetchingCertianUserDetails} from '../../ApiRequests';
 import { ManOutlined, WomanOutlined } from '@ant-design/icons';
 import Homebtn from '../../Components/Homebtn/Homebtn';
-import { Alert } from 'antd';
-const URL = 'https://dummyapi.io/data/api/user';
-const APP_ID = '605dcfd123d78a50c5067229';
-
-
 
 function UserProfile(){
 
