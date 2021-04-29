@@ -4,32 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-// import reducer from '../Features/usersSlice/usersSlice';
-// import { combineReducers } from 'redux';
-import store from './Store/store';
-// import rootReducer from "./reducers";
-// import { createStore, applyMiddleware, compose } from "redux";
-// import { configureStore } from '@reduxjs/toolkit';
-// import thunk from "redux-thunk";
-// import promiseMiddleware from "redux-promise";
-// import { composeWithDevTools } from "redux-devtools-extension";
-
-// let store ; // GLOBALIZED STATE
-
-// const createStoreWithMiddleware = applyMiddleware(
-//   promiseMiddleware,
-//   ReduxThunk
-// )(createStore);
-
-// store = createStoreWithMiddleware(
-//   rootReducer,
-//   composeWithDevTools()
-// );
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './Store/store';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

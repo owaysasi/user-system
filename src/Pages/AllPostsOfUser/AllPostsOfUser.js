@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './AllPostsOfUser.css';
 import 'antd/dist/antd.css';
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Homebtn from '../../Components/Homebtn/Homebtn';
 import PostShape from '../../Components/PostShape/PostShape';
-import {FetchingCertianUserPosts} from '../../ApiRequests';
+import {FetchingCertianUserPosts} from '../../ApiRequests/Requests';
 
 
 function AllPostsOfUser(){
 
     const location = useLocation();
-
     const [posts, setPosts] = useState([]);
     const [ loading, setLoading ] = useState(true);
 

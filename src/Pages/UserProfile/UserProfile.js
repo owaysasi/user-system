@@ -3,7 +3,7 @@ import './UserProfile.css';
 import 'antd/dist/antd.css';
 import Postbtn from '../../Components/Postbtn/Postbtn';
 import { useLocation } from "react-router-dom";
-import {FetchingCertianUserDetails} from '../../ApiRequests';
+import {FetchingCertianUserDetails} from '../../ApiRequests/Requests';
 import { ManOutlined, WomanOutlined } from '@ant-design/icons';
 import Homebtn from '../../Components/Homebtn/Homebtn';
 

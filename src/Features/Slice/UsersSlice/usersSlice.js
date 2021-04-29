@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import _ from 'lodash';
-
-const URL = 'https://dummyapi.io/data/api/user';
-const APP_ID = '605dcfd123d78a50c5067229';
 
 export const initialState = { // The initial value of the state
   users:[],
   posts:["Hello"," darling"]
 };
-
 
 const usersSlice = createSlice({ // The Slice of users 
   name: 'users',
@@ -33,13 +31,16 @@ const usersSlice = createSlice({ // The Slice of users
     },
   },
 });
-
-  
-  
+    
 // export const getMemoMath = _.memoize(fetchDataConsole); // memoizing 
 
-const { actions, reducer } = usersSlice;
+export const { actions, reducer } = usersSlice;
+
+const persistConfig = {
+  key:'root',
+  storage
+}
+
+export default persistReducer(persistConfig, reducer);
 
 export const { fetchUsers, addUser, deleteUser } = actions;
-
-export default reducer;
